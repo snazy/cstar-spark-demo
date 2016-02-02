@@ -1,0 +1,45 @@
+plugins {
+  id 'scala'
+  id 'com.github.johnrengelman.shadow' version '1.2.2'
+}
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+configurations {
+  provided
+  compile.extendsFrom provided
+}
+
+sourceSets {
+  main {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided
+  }
+  test {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided
+  }
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'com.datastax.cstar_spark_demo.GenerateData'
+  }
+}
+
+dependencies {
+  def sparkVersion = "1.4.1"
+  def sparkCassandraVersion = "1.4.1"
+
+  compile 'org.slf4j:slf4j-api:1.7.5'
+  compile "org.scala-lang:scala-library:2.10.4"
+  compile "org.scala-lang:scala-compiler:2.10.4"
+
+  compile "org.apache.spark:spark-core_2.10:" + sparkVersion
+  compile "com.datastax.spark:spark-cassandra-connector_2.10:" + sparkCassandraVersion
+
+  compile 'org.apache.kafka:kafka_2.10:0.9.0.0'
+}

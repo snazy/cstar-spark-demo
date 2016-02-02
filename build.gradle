@@ -1,0 +1,11 @@
+apply plugin: 'idea'
+apply plugin: 'scala'
+
+/*
+project {
+    name 'cstar-spark-demo'
+    group 'com.datastax.cstar-spark-demo'
+}
+ */
+
+version '0.1-SNAPSHOT'
